@@ -1,0 +1,73 @@
+\documentclass[a4paper, 11pt]{article}
+
+\input{tex/preamble.tex}
+\input{tex/macros.tex}
+
+\title{Seminari 1 de Geometria diferencial clàssica}
+\author{Ana Martínez \and Javier Orejuela \and%
+  Pedro Pasalodos Guiral \and Mario Vago Marzal}
+\date{Curso 2023--2024}
+
+\begin{document}
+  \maketitle
+
+  \begin{exercise}[Examen 2a convocatòria, juny 2023]
+    Considerem la corba parametritzada
+    \[
+      \alpha(t) = (e^{at} \cos t, e^{at} \sin t)
+    \]
+    amb $a > 0$. Siga $T_t$ el triangle que té per vèrtexs el punt $P =
+    \alpha(t)$ y les interseccions de les rectes tangent i normal
+    d'$\alpha$ en $P$ amb la recta que pasa por l'origen de coordenades y
+    és perpendicular al vector de posició de $P$. Prova que l'àrea $A(t)$
+    de $T_t$ és inversament proporcional al quadrat de la curvatura
+    d'$\alpha$ en $t$.
+  \end{exercise}
+
+  \begin{solution}
+    
+  \end{solution}
+
+  \begin{exercise}[Primer parcial, gener 2023]
+    Siguen $O$ el punt $(0, 0)$, $r_0$ la recta d'equació $x=1$ i $a \in
+    \RR^+$. Es considera per a cada $t \in \RR$ la corba la recta de
+    pendent $t$ que passa per l'origen $O$. Aquesta recta talla a $r_0$ en
+    un punt $P(t)$. Siga $Q(t)$ el punt de la recta $r_1$ a distància $a$
+    de $P(t)$ situat al mateix semipla que $O$ respecte a $r_0$.
+
+    \begin{enumerate}[label=(\alph*)]
+      \item Dona una parametrització $\alpha_a$ dels punts $Q(t)$ i troba
+      per a quins valors d'$a$ la corba parametritzada $\alpha_a$ és
+      regular.
+      \item Calcula la curvatura amb signe d'$\alpha_a$ i troba per a quins
+      valors d'$a$ és diferent de $0$.
+    \end{enumerate}
+  \end{exercise}
+
+  \begin{exercise}[Primer parical, gener 2018]
+    Siga $h: ]0, 2\pi[ \longrightarrow \RR$ una funció diferenciable i siga
+    $\alpha ]0, 2\pi[ \longrightarrow \RR^2$ una corba parametritzada
+    definida per l'expressió
+    \[
+      \alpha(t) = (h(t) \cos t - h'(t) \sin t,
+      h(t) \sin t + h'(t) \cos t).
+    \]
+
+    \begin{enumerate}[label=(\alph*)]
+      \item Determina la condició que ha de complir $h$ per tal que
+      $\alpha$ siga regular. Per a la resta de l'exercisi se suposorà que
+      es compleix aquesta condició.
+      \item Calcula la curvatura amb signe de $\alpha$.
+      \item Comprova que, per a tot $t \in ]0, 2\pi[$, les rectes tangents
+      a $\alpha$ en $t$ i en $t + \pi$ són para\lgem{}eles i determina la
+      distància entre elles. A aquesta distància se l'anomena amplada de
+      $\alpha$ en $t$.
+      \item Se considera la funció $h(t) = a \cos^2 (kt/2) + b$, on $a$ i
+      $b$ són nombres reals positius i $k$ és un enter positiu imparell.
+      Demostra que en auqest cas, la corba $\alpha$ és d'amplada constant
+      (i calcula el seu valor).
+      \item Demostra que la corba $\alpha$ de l'apartat anterior té
+      curvatura constant si i només si $k = 1$.
+    \end{enumerate}
+  \end{exercise}
+\end{document}
