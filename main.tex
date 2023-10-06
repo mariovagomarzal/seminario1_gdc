@@ -25,7 +25,118 @@
   \end{exercise}
 
   \begin{solution}
+    Notem que podem expressar la corba $\alpha$ amb complexos en forma
+    exponencial com
+    \[
+      \alpha(t) = e^{at + ti} = e^{(a + i)t},
+    \]
+    fet el qual facilitarà els càlculs.
+
+    En primer lloc, calcularem la curvatura d'$\alpha$. Així, notem que
+    \[
+      \alpha'(t) = (a + i)e^{(a + i)t}
+    \]
+    i que
+    \[
+      \alpha''(t) = (a + i)^2e^{(a + i)t}.
+    \]
+
+    Pel atra banda, tenim que
+    \[
+      J \alpha'(t) = i (a + i)e^{a + i}t =
+      (ai - 1)e^{(a + i)t},
+    \]
+    amb el que
+    \[
+      \begin{split}
+        \gen{\alpha''(t), J \alpha'(t)}
+        &= \re\left[(a + i)^2e^{(a + i)t}
+        (-ai - 1)e^{(a + i)t}\right] \\
+        &= -\re\left[e^{2a}(a^3i -a^2 -ai - 1)\right] \\
+        &= e^{2a} (a^2 + 1).
+      \end{split} 
+    \]
+
+    Per últim, tenim que
+    \[
+      \norm{\alpha'(t)}^2 = \norm{(a + i)e^{(a + i)t}}^2 =
+      % TODO
+    \]
+
+    Així, podem calcular la curvatura d'$\alpha$ com
+    \[
+      \kappa(t) = \frac{\gen{\alpha''(t), J \alpha'(t)}}%
+      {\norm{\alpha'(t)}^3}
+      = \frac{2^{2a}(a^2 + 1)}{(\sqrt{a^2 + 1}e^{at})^3}
+      = \frac{e^{-at}}{\sqrt{a^2 + 1}}.
+    \]
     
+    Ara, per a calcular l'àrea del triangle $T_t$, primer hem de trobar
+    les rectes que ho formen. Així, tenim que
+    \[
+      r_1: 0 + J \alpha(t)\lambda_1 = i e^{(a+i)t} \lambda_1,
+    \]
+    amb $\lambda_1 \in \RR$ i que
+    \[
+      r_2: \alpha(t) + \alpha'(t) \lambda_2 =
+      e^{at + ti} + (a + i)e^{at + ti} \lambda_2
+    \]
+    amb $\lambda_2 \in \RR$.
+
+    Si expressem les rectes en $\RR^2$, tenim que
+    \[
+      r_1: (a_1, b_1) + (c_1, d_1) \lambda_1
+    \]
+    i que
+    \[
+      r_2: (a_2, b_2) + (c_2, d_2) \lambda_2,
+    \]
+    de manera que el sistema
+    \[
+      \begin{cases}
+        a_1 + c_1 \lambda_1 = a_2 + c_2 \lambda_2 \\
+        b_1 + d_1 \lambda_1 = b_2 + d_2 \lambda_2
+      \end{cases}
+      \iff
+      \begin{cases}
+        -\sin (t) \lambda_1 = \cos (t) +
+        \left[-a\sin (t) - \cos (t)\right] \lambda_2 \\
+        \cos (t) \lambda_1 = \sin (t) +
+        \left[a\cos (t) - \sin (t)\right] \lambda_2
+      \end{cases}
+    \]
+    té solució $(\lambda_1, \lambda_2) = (a, 1)$.
+
+    Ara calcularem els costats base ($M$) i altura ($N$) del triangle:
+    \[
+      M = r_1(a) = ai e^{(a + i)t} \quad \text{i} \quad
+      r_1(-\frac{1}{a}) = -\frac{e^{(a + i)t}}{a}.
+    \]
+
+    Calculem la longitud dels costats $\vec{PM}$ i $\vec{PN}$ on
+    \[
+      \vec{PM} = ae^{(a + i)t}i - e^{(a + i)t}
+      \quad \text{i} \quad
+      \vec{PN} = -\frac{e^{(a + i)t}}{a}i - e^{(a + i)t}.
+    \]
+    Així, les seues longituds són
+    \[
+      \norm{\vec{PM}} = e^{at} \sqrt{1 + a^2}
+      \quad \text{i} \quad
+      \norm{\vec{PN}} = \frac{e^{at} \sqrt{1 + a^2}}{a}.
+    \]
+    
+    Per tant, l'àrea del triangle $T_t$ és
+    \[
+      A(t) = \frac{1}{2} \norm{\vec{PM}} \norm{\vec{PN}}
+      = \frac{1}{2a} e^{2at} (1 + a^2).
+    \]
+
+    Concloem que
+    \[
+      A(t) = \frac{1}{2a} \cdot \frac{1}{\kappa(t)^2},
+    \]
+    com volíem demostrar.
   \end{solution}
 
   \begin{exercise}[Primer parcial, gener 2023]
