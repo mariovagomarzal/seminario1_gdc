@@ -57,33 +57,79 @@
       \end{split} 
     \]
 
-    Per últim, tenim que
+    Per últim, per a calcular la norma, tenim que
     \[
-      \norm{\alpha'(t)}^2 = \norm{(a + i)e^{(a + i)t}}^2 =
-      % TODO
+      \norm{\alpha'(t)}^2 
+      = \gen{(a + i)e^{(a + i)t}, (a - i)e^{(a - i)t}}
+      = (a^2 + 1)e^{2at},
+    \]
+    és a dir,
+    \[
+      \norm{\alpha'(t)} = \sqrt{a^2 + 1}e^{at}.
     \]
 
     Així, podem calcular la curvatura d'$\alpha$ com
     \[
       \kappa(t) = \frac{\gen{\alpha''(t), J \alpha'(t)}}%
       {\norm{\alpha'(t)}^3}
-      = \frac{2^{2a}(a^2 + 1)}{(\sqrt{a^2 + 1}e^{at})^3}
+      = \frac{e^{2a}(a^2 + 1)}{(\sqrt{a^2 + 1}e^{at})^3}
       = \frac{e^{-at}}{\sqrt{a^2 + 1}}.
     \]
     
     Ara, per a calcular l'àrea del triangle $T_t$, primer hem de trobar
-    les rectes que ho formen. Així, tenim que
+    les rectes que ho formen. A continuació, trobem un esquema de la
+    situació:
+    \begin{center}
+      \begin{tikzpicture}
+        \node (P) at (0, 0) {};
+        \draw[fill] (P) circle (1pt);
+        \node[above right] at (P) {$P = \alpha(t)$};
+
+        \node (N) at (0, -3) {};
+        \draw[fill] (N) circle (1pt);
+        \node[below] at (N) {$N$};
+
+        \node (M) at (-2, 0) {};
+        \draw[fill] (M) circle (1pt);
+        \node[left] at (M) {$M$};
+
+        \draw[->, thick] (P.center) -- (0, -1) node[midway, right] {$\vec{t}$};
+        \draw (P.center) -- (N.center)
+          node[midway, right] {$r_2$};
+
+        \draw[->, thick] (P.center) -- (-1, 0) node[midway, above]
+        {$\vec{n}$};
+        \draw (P.center) -- (M.center)
+          node[midway, above] {$r_3$};
+
+        \draw (M.center) -- (N.center)
+          node[midway, left] {$r_1$};
+
+        \node (O) at (190:1.8) {};
+        \draw[fill] (O) circle (1pt);
+        \node[below left] at (O) {$O$};
+        \draw[dashed] (O.center) -- (P.center);
+      \end{tikzpicture}
+    \end{center}
+    
+    Així, tenim que
     \[
-      r_1: 0 + J \alpha(t)\lambda_1 = i e^{(a+i)t} \lambda_1,
+      r_1: 0 + J \alpha(t)\lambda_1 = i e^{at + ti} \lambda_1,
     \]
-    amb $\lambda_1 \in \RR$ i que
+    amb $\lambda_1 \in \RR$, que
     \[
       r_2: \alpha(t) + \alpha'(t) \lambda_2 =
-      e^{at + ti} + (a + i)e^{at + ti} \lambda_2
+      e^{at + ti} + (a + i)e^{at + ti} \lambda_2,
     \]
-    amb $\lambda_2 \in \RR$.
+    amb $\lambda_2 \in \RR$ i que
+    \[
+      r_3: \alpha(t) + J \alpha'(t) \lambda_3 =
+      e^{at + ti} + i(a + i)e^{at + ti} \lambda_3,
+    \]
+    amb $\lambda_3 \in \RR$.
 
-    Si expressem les rectes en $\RR^2$, tenim que
+    Per a trobar $N$, volem $r_1 \cap r_2$. Si expressem les rectes en 
+    $\RR^2$, tenim que
     \[
       r_1: (a_1, b_1) + (c_1, d_1) \lambda_1
     \]
@@ -91,6 +137,23 @@
     \[
       r_2: (a_2, b_2) + (c_2, d_2) \lambda_2,
     \]
+    on, per l'expansió
+    \[
+      i e^{at + ti} \lambda_1 
+      = e^{at + ti} + (a + i)e^{at + ti} \lambda_2,
+    \]
+    tenim que
+    \[
+      [\underbrace{-\sin t}_{c_1}
+      + i\underbrace{\cos t}_{d_1}
+      ] \lambda_1
+      = (\underbrace{\cos t}_{a_2}
+      + i\underbrace{\sin t}_{b_2})
+      + [\underbrace{a\cos t - \sin t}_{c_2}
+      + i (\underbrace{a\sin t + \cos t}_{d_2})
+      ] \lambda_2,
+    \]
+
     de manera que el sistema
     \[
       \begin{cases}
@@ -100,17 +163,50 @@
       \iff
       \begin{cases}
         -\sin (t) \lambda_1 = \cos (t) +
-        \left[-a\sin (t) - \cos (t)\right] \lambda_2 \\
+        \left[a\cos (t) - \sin (t)\right] \lambda_2 \\
         \cos (t) \lambda_1 = \sin (t) +
-        \left[a\cos (t) - \sin (t)\right] \lambda_2
+        \left[\sin (t) + \cos (t)\right] \lambda_2
       \end{cases}
     \]
-    té solució $(\lambda_1, \lambda_2) = (a, 1)$.
+    té solució $(\lambda_1, \lambda_2) = (-\frac{1}{a}, -\frac{1}{a})$.
 
-    Ara calcularem els costats base ($M$) i altura ($N$) del triangle:
+    Anàlogament, per a trobar $M$, volem $r_1 \cap r_3$. De nou, de
+    l'expansió
+    \[
+      i e^{at + ti} \lambda_1 
+      = e^{at + ti} + i(a + i)e^{at + ti} \lambda_3,
+    \]
+    tenim que
+    \[
+      [\underbrace{-\sin t}_{c_1}
+      + i\underbrace{\cos t}_{d_1}
+      ] \lambda_1
+      = (\underbrace{\cos t}_{a_3}
+      + i\underbrace{\sin t}_{b_3})
+      + i[\underbrace{a\cos t - \sin t}_{c_3}
+      + i (\underbrace{a\sin t + \cos t}_{d_3})
+      ] \lambda_3,
+    \]
+    de manera que el sistema
+    \[
+      \begin{cases}
+        a_1 + c_1 \lambda_1 = a_3 + c_3 \lambda_3 \\
+        b_1 + d_1 \lambda_1 = b_3 + d_3 \lambda_3
+      \end{cases}
+      \iff
+      \begin{cases}
+        -\sin (t) \lambda_1 = \cos (t) +
+        \left[a\cos (t) - \sin (t)\right] \lambda_3 \\
+        \cos (t) \lambda_1 = \sin (t) +
+        \left[\sin (t) + \cos (t)\right] \lambda_3
+      \end{cases}
+    \]
+    té solució $(\lambda_1, \lambda_3) = (a, 1)$.
+
+    Ara calcularem els costats base ($\vec{PM}$) i altura ($\vec{PN}$) del triangle:
     \[
       M = r_1(a) = ai e^{(a + i)t} \quad \text{i} \quad
-      r_1(-\frac{1}{a}) = -\frac{e^{(a + i)t}}{a}.
+      N = r_1\left(-\frac{1}{a}\right) = -\frac{e^{(a + i)t}}{a}.
     \]
 
     Calculem la longitud dels costats $\vec{PM}$ i $\vec{PN}$ on
@@ -156,7 +252,94 @@
   \end{exercise}
 
   \begin{solution}
+    \begin{enumerate}[label=(\alph*)]
+      \item Dona una parametrització $\alpha_a$ dels punts $Q(t)$ i troba per a quins valors de $a$ la corba
+      parametritzada $\alpha_a$ és regular.
     
+      Com podem adonar-nos en el dibuix, el vector director de la recta és 
+      $\vec{d} = (1,t)$. Si el normalitzem, obtenim $\hat{d} = \frac{1}{\sqrt{1+t^2}}(1,t)$.
+    
+      Així, com volem trobar el punt sobre aquesta recta que está a distància $\sqrt{1+t^2}-a$,
+      obtenim
+    
+      $$Q(t) = (\sqrt{1+t^2}-a)\left(\frac{1}{\sqrt{1+t^2}}\right) (1,t) = \left(1-\frac{a}{\sqrt{1+t^2}}\right) (1,t)$$
+    
+      A l'enunciat ens sugereixen fer el canvi $t=\tan\theta$. D'aquesta manera, tenim que 
+      $\sqrt{1+\tan^2 (\theta)} = \frac{1}{\cos \theta}$. Per tant, reescrivint
+    
+      $$Q (\theta) = (1- a\cos \theta)(1,\tan \theta) = (1-a\cos \theta, \tan \theta - a\sin \theta)$$
+    
+      Ara, calcularem la primera derivada per comprovar quan la corba és regular.
+    
+      $$
+      Q'(\theta) = (a\sin \theta, \sec^2 \theta - a\cos \theta) 
+      $$
+    
+      Per a vore quan no és regular, volem trobar per a quins valors de $a$ i $\theta$
+      tenim que $Q'(\theta) = (0,0)$. Així,
+    
+      $$
+      \begin{cases}
+        a\sin\theta &= 0\\
+        sec^2\theta - a\cos\theta &= 0
+      \end{cases}
+      $$
+    
+      De la primera equació tenim que $a=0$ o $\sin\theta = 0 $.
+      
+      \begin{itemize}
+        \item Si $a=0$, de la segona equació ens queda $\sec^2 \theta = 0 \implies \sec \theta = 0$.
+        Així, aquest cas no es pot donar.
+      
+        \item Si $\sin\theta = 0$, tenim que $\theta=0$ perquè en el canvi
+        de variable tenim que $\theta \in ]-\frac{\pi}{2},\frac{\pi}{2}[$.
+        Ara, de la segona equació tenim que $1-a=0 \implies a=1$.
+      \end{itemize}
+    
+      Per tant, $Q(\theta)$ no és regular quan $a=1$ i el punt problemàtic es dona quan $\theta=0$.
+      Aleshores, $Q(\theta)$ és regular per a tot $a\neq 1$.
+    
+    
+      \item Calcula la curvatura amb signe de $\alpha_a$ i troba per a quins valors de $a$ és diferent de zero.
+      
+      Primer, calcularem la segona derivada de $Q(\theta)$.
+  
+      $$Q''(\theta) = (a\cos \theta, 2\sec^2\theta \tan\theta + a\sin\theta)$$
+  
+      Ara calcularem la norma de $Q'(\theta)$
+  
+      \begin{align*}
+        ||Q'(\theta)||^2 &=a^2\sin^2\theta + (\sec^2\theta- a\cos\theta)^2 =\\
+        &= a^2\sin^2\theta + \sec^4\theta + a^2\cos^2\theta - 2a\sec\theta = \\
+        &=a^2 + \sec^4 \theta -2a\sec\theta
+      \end{align*}
+  
+      Així, calculem
+  
+      \begin{align*}
+        \gen{Q''(\theta), JQ'(\theta)} &= (a\cos \theta, 2\sec^2\theta \tan\theta + a\sin\theta) \cdot ( -\sec^2 \theta + a\cos \theta, a\sin \theta) =\\
+        &= -a\sec^2\theta \cos \theta + a^2 \cos^2\theta + 2a\sin\theta \tan\theta \sec^2\theta + a^2\sin^2\theta = \\
+        &= a^2 -a\sec\theta + 2a\tan^2\theta \sec\theta = \\
+        &= a^2 -a\sec\theta + 2a \sin^2\theta \sec^3\theta
+      \end{align*}
+  
+      Per tant, tenim
+  
+      $$\kappa_Q (\theta) = \frac{\gen{Q''(\theta), JQ'(\theta)}}{||Q'(\theta)||} 
+      = \frac{a^2 -a\sec\theta + 2a \sin^2\theta \sec^3\theta}{(a^2 + \sec^4 \theta -2a\sec\theta)^{\frac{3}{2}}}$$
+  
+  
+      Comprovarem quan la curvatura és zero.
+  
+      \begin{align*}
+        \kappa_Q (\theta) = 0 &\iff a^2 -a\sec\theta + 2a \sin^2\theta \sec^3\theta = 0\\
+        & \iff a(a-\sec\theta +2\sin^2\theta \sec^3\theta)=0
+      \end{align*}
+  
+      Notem que això passa quan $a=0$ o $a-\sec\theta +2\sin^2\theta \sec^3\theta=0$.
+      Així, la curvatura és zero o bé quan $a=0$ o bé quan $a = \sec\theta - 2\sin^2\theta \sec^3\theta$,
+      per a qualsevol $\theta \in ]-\frac{\pi}{2},\frac{\pi}{2}[$.
+    \end{enumerate}    
   \end{solution}
 
   \begin{exercise}[Primer parical, gener 2018]
@@ -187,6 +370,78 @@
   \end{exercise}
 
   \begin{solution}
-    
+    \begin{enumerate}[label=(\alph*)]
+      \item Considerem $\alpha(t)=(h(t) \cos t - h'(t) \sin t, h(t) \sin t + h'(t) \cos t)$.
+      Per a comprovar quan $\alpha(t)$ és regular, primer derivarem
+      
+      \begin{align*}
+      \dot{\alpha}(t) &= (\cancel{h'(t)\cos t} - h(t)\sin t -h''(t) \sin t - \cancel{h'(t)\cos t}, \\
+      &
+                           \cancel{h'(t) \sin t} + h(t)\cos t + h''(t)\cos t - \cancel{h'(t) \sin t})\\
+      &= (h(t)+h''(t))(-\sin t, \cos t) = (h(t)+h''(t))(\sin (-t), \cos (-t))\\
+      &= (h(t)+h''(t))e^{-it}
+      \end{align*}
+  
+      Així, tenim que $\alpha(t)$ no és regular$\iff \dot{\alpha}(t) = 0 \iff h(t)+h''(t)=0 \iff h(t)=-h''(t)$ 
+  
+      Per tant, $\alpha(t)$ és regular sempre que $h(t) \neq -h''(t)$ per a tot $t \in ]0, 2\pi[$.
+      \item Com que $\alpha$ és regular, podem calcular la curvatura amb signe de $\alpha$ com
+      \[
+        \begin{split}
+          \kappa(t) &= \frac{\gen{\alpha''(t), J \alpha'(t)}}%
+        {\norm{\alpha'(t)}^3} \\
+        &= \frac{\gen{-i(h(t) + h''(t))e^{-it},%
+        i(h(t) + h''(t))e^{-it}}}{(h(t) + h''(t))^3} \\
+        &= \frac{1}{h(t) + h''(t)}.
+        \end{split}
+      \]
+      \item En la forma complexa que hem vist al primer apartar, és clar
+      que
+      \[
+        \alpha(t + \pi) = e^{\pi} (h'(t) + h''(t))e^{-it},
+      \]
+      és a dir, que la recta tangent a $\alpha$ en $t + \pi$ és la mateixa.
+
+      Per a calcular l'amplada, observem el següent esquema:
+      \begin{center}
+        \begin{tikzpicture}
+          \draw (0, 0) -- (5, 0);
+          \draw (0, -3) -- (5, -3);
+        
+          \draw[fill] (2,0) circle (1pt);
+          \node (t) at (2,0) {};
+          \node[above] at (t) {$\alpha(t)$};
+          \draw[fill] (3.5,-3) circle (1pt);
+          \node (tpi) at (3.5,-3) {};
+          \node[below] at (tpi) {$\alpha(t + \pi)$};
+        
+          \draw[dashed] (t.center) -- (tpi.center)
+            node[midway, right] {$h(t) - h(t + \pi)$};
+          \draw (t.center) -- (2,-3);
+        \end{tikzpicture}
+      \end{center}
+
+      És a dir, l'amplada és
+      \[
+        \gen{\alpha(t + \pi) - \alpha(t), J \alpha(t)} =
+        \sqrt{(h(t) + h(t + \pi))^2 + (h'(t) + h'(t + \pi))^2}.
+      \]
+      \item
+      \item Si prenem l'$h$ de l'apartat anterior, tenim que
+      \[
+        \begin{split}
+          \kappa(t) = \frac{1}{h(t) + h''(t)}
+          &= \frac{1}{k^2 - 1}\cos^2 \left(\frac{kt}{2}\right)
+          - \frac{k^2}{2} - \frac{b}{a}.
+        \end{split}
+      \]
+      
+      Així, notem que $\kappa(t)$ es constant si i només si
+      \[
+        (k^2 - 1) \cos^2 \frac{kt}{2}
+      \]
+      és constant, és a dir, si i només si $k = \pm 1$ o $k = 0$. No obstant, com
+      $k$ és un imparell positiu, necessàriament $k = 1$, el que volíem.
+    \end{enumerate}
   \end{solution}
 \end{document}
